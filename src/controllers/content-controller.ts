@@ -2,14 +2,10 @@ import type { Request, Response } from "express";
 import mongoose from "mongoose";
 import { ContentModel, TagModel } from "../models/db-model.js";
 import { ContentSchema, DeleteContentSchema } from "../validations/user-validation.js";
-import { userMiddleware } from "../middleware/user-middleware.js";
 
 export const addContent = async (req: Request, res: Response) => {
     try {
-        const userId = userMiddleware(req);
-        if (!userId) {
-            return res.status(403).json({ message: "Unauthorized" });
-        }
+        const userId = req.userId;
 
         const result = ContentSchema.safeParse(req.body);
         if (!result.success) {
@@ -44,10 +40,7 @@ export const addContent = async (req: Request, res: Response) => {
 
 export const getContent = async (req: Request, res: Response) => {
     try {
-        const userId = userMiddleware(req);
-        if (!userId) {
-            return res.status(403).json({ message: "Unauthorized" });
-        }
+        const userId = req.userId;
 
         const content = await ContentModel.find({ userId: new mongoose.Types.ObjectId(userId) })
             .populate("tags")
@@ -69,10 +62,7 @@ export const getContent = async (req: Request, res: Response) => {
 
 export const deleteContent = async (req: Request, res: Response) => {
     try {
-        const userId = userMiddleware(req);
-        if (!userId) {
-            return res.status(403).json({ message: "Unauthorized" });
-        }
+        const userId = req.userId;
 
         const result = DeleteContentSchema.safeParse(req.body);
         if (!result.success) {

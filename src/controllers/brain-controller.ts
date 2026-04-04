@@ -2,14 +2,10 @@ import type { Request, Response } from "express";
 import mongoose from "mongoose";
 import { ContentModel, LinkModel, UserModel } from "../models/db-model.js";
 import { ShareBrainSchema } from "../validations/user-validation.js";
-import { userMiddleware } from "../middleware/user-middleware.js";
 
 export const shareBrain = async (req: Request, res: Response) => {
     try {
-        const userId = userMiddleware(req);
-        if (!userId) {
-            return res.status(403).json({ message: "Unauthorized" });
-        }
+        const userId = req.userId;
 
         const result = ShareBrainSchema.safeParse(req.body);
         if (!result.success) {
