@@ -1,6 +1,6 @@
 # Thought Garden
 
-A full-stack REST API for saving and sharing content (articles, tweets, YouTube videos, links) with tagging support. Users can manage their personal "garden" - a collection of useful content - and optionally share it with others.
+A REST API for saving and sharing content (articles, tweets, YouTube videos, links) with tagging support. Users can manage their personal "garden" - a collection of useful content - and optionally share it with others.
 
 ## Tech Stack
 
