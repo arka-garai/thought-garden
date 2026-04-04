@@ -3,14 +3,14 @@ import express from "express";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth-routes.js";
 import contentRoutes from "./routes/content-routes.js";
-import brainRoutes from "./routes/brain-routes.js";
+import gardenRoutes from "./routes/garden-routes.js";
 
 const app = express();
 app.use(express.json());
 
 app.use("/api/v1", authRoutes);
 app.use("/api/v1/content", contentRoutes);
-app.use("/api/v1/brain", brainRoutes);
+app.use("/api/v1/garden", gardenRoutes);
 
 const PORT = process.env.PORT || 3345;
 

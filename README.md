@@ -1,6 +1,6 @@
 # Thought Garden
 
-A full-stack REST API for saving and sharing content (articles, tweets, YouTube videos, links) with tagging support. Users can manage their personal "brain" - a collection of useful content - and optionally share it with others.
+A full-stack REST API for saving and sharing content (articles, tweets, YouTube videos, links) with tagging support. Users can manage their personal "garden" - a collection of useful content - and optionally share it with others.
 
 ## Tech Stack
 
@@ -21,11 +21,11 @@ thought-garden/
 │   ├── controllers/
 │   │   ├── auth-controller.ts  # Authentication logic
 │   │   ├── content-controller.ts # Content CRUD operations
-│   │   └── brain-controller.ts # Brain sharing logic
+│   │   └── garden-controller.ts # Garden sharing logic
 │   ├── routes/
 │   │   ├── auth-routes.ts      # Auth endpoints
 │   │   ├── content-routes.ts  # Content endpoints
-│   │   └── brain-routes.ts     # Brain sharing endpoints
+│   │   └── garden-routes.ts     # Garden sharing endpoints
 │   ├── middleware/
 │   │   └── user-middleware.ts # JWT verification
 │   ├── models/
@@ -59,12 +59,12 @@ thought-garden/
 | GET | `/` | Get all user's content | Yes |
 | DELETE | `/` | Delete content by ID | Yes |
 
-### Brain Routes (`/api/v1/brain`)
+### Garden Routes (`/api/v1/garden`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
-| POST | `/share` | Enable/disable brain sharing | Yes |
-| GET | `/:shareLink` | View shared brain | No |
+| POST | `/share` | Enable/disable garden sharing | Yes |
+| GET | `/:shareLink` | View shared garden | No |
 
 ## Getting Started
 
@@ -165,9 +165,9 @@ Authorization: Bearer <token>
 # Response: { "message": "Deleted" }
 ```
 
-### Enable Brain Sharing
+### Enable Garden Sharing
 ```bash
-POST /api/v1/brain/share
+POST /api/v1/garden/share
 Authorization: Bearer <token>
 {
   "share": true
@@ -175,9 +175,9 @@ Authorization: Bearer <token>
 # Response: { "link": "abc123xyz" }
 ```
 
-### Disable Brain Sharing
+### Disable Garden Sharing
 ```bash
-POST /api/v1/brain/share
+POST /api/v1/garden/share
 Authorization: Bearer <token>
 {
   "share": false
@@ -185,9 +185,9 @@ Authorization: Bearer <token>
 # Response: { "message": "Sharing disabled" }
 ```
 
-### View Shared Brain
+### View Shared Garden
 ```bash
-GET /api/v1/brain/abc123xyz
+GET /api/v1/garden/abc123xyz
 # Response: { "username": "johndoe", "content": [...] }
 ```
 

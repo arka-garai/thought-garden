@@ -29,6 +29,6 @@ export const DeleteContentSchema = z.object({
     contentId: z.string()
 });
 
-export const ShareBrainSchema = z.object({
+export const ShareGardenSchema = z.object({
     share: z.boolean()
 });

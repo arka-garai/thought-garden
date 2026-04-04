@@ -1,12 +1,12 @@
 import type { Request, Response } from "express";
 import { ContentModel, LinkModel, UserModel } from "../models/db-model.js";
-import { ShareBrainSchema } from "../validations/user-validation.js";
+import { ShareGardenSchema } from "../validations/user-validation.js";
 
-export const shareBrain = async (req: Request, res: Response) => {
+export const shareGarden = async (req: Request, res: Response) => {
     try {
         const userId = req.userId;
 
-        const result = ShareBrainSchema.safeParse(req.body);
+        const result = ShareGardenSchema.safeParse(req.body);
         if (!result.success) {
             return res.status(411).json({ errors: result.error.issues.map((i) => i.message) });
         }
@@ -31,7 +31,7 @@ export const shareBrain = async (req: Request, res: Response) => {
     }
 };
 
-export const getSharedBrain = async (req: Request, res: Response) => {
+export const getSharedGarden = async (req: Request, res: Response) => {
     try {
         const shareLinkParam = req.params.shareLink as string;
         const link = await LinkModel.findOne({ hash: shareLinkParam });
