@@ -16,7 +16,7 @@ export const signup = async (req: Request, res: Response) => {
     try {
         const result = SignupSchema.safeParse(req.body);
         if (!result.success) {
-            return res.status(411).json({ errors: result.error.issues.map((i) => i.message) });
+            return res.status(400).json({ errors: result.error.issues.map((i) => i.message) });
         }
 
         const { username, password } = result.data;
@@ -38,7 +38,7 @@ export const signin = async (req: Request, res: Response) => {
     try {
         const result = SigninSchema.safeParse(req.body);
         if (!result.success) {
-            return res.status(411).json({ errors: result.error.issues.map((i) => i.message) });
+            return res.status(400).json({ errors: result.error.issues.map((i) => i.message) });
         }
 
         const { username, password } = result.data;

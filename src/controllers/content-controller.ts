@@ -8,7 +8,7 @@ export const addContent = async (req: Request, res: Response) => {
 
         const result = ContentSchema.safeParse(req.body);
         if (!result.success) {
-            return res.status(411).json({ errors: result.error.issues.map((i) => i.message) });
+            return res.status(400).json({ errors: result.error.issues.map((i) => i.message) });
         }
 
         const { type, link, title, tags = [] } = result.data;
@@ -56,7 +56,7 @@ export const deleteContent = async (req: Request, res: Response) => {
 
         const result = DeleteContentSchema.safeParse(req.body);
         if (!result.success) {
-            return res.status(411).json({ errors: result.error.issues.map((i) => i.message) });
+            return res.status(400).json({ errors: result.error.issues.map((i) => i.message) });
         }
 
         const { contentId } = result.data;

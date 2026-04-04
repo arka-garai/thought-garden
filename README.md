@@ -176,7 +176,7 @@ Authorization: Bearer <token>
 {
   "share": true
 }
-# Response: { "link": "abc123xyz" }
+# Response: { "link": "550e8400-e29b-41d4-a716-446655440000" }
 ```
 
 ### Disable Garden Sharing
@@ -191,7 +191,7 @@ Authorization: Bearer <token>
 
 ### View Shared Garden
 ```bash
-GET /api/v1/garden/abc123xyz
+GET /api/v1/garden/550e8400-e29b-41d4-a716-446655440000
 # Response: { "username": "johndoe", "content": [...] }
 ```
 

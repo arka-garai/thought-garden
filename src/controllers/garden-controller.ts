@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { randomUUID } from "crypto";
 import { ContentModel, LinkModel, UserModel } from "../models/db-model.js";
 import { ShareGardenSchema } from "../validations/user-validation.js";
 
@@ -8,7 +9,7 @@ export const shareGarden = async (req: Request, res: Response) => {
 
         const result = ShareGardenSchema.safeParse(req.body);
         if (!result.success) {
-            return res.status(411).json({ errors: result.error.issues.map((i) => i.message) });
+            return res.status(400).json({ errors: result.error.issues.map((i) => i.message) });
         }
 
         const { share } = result.data;
@@ -19,7 +20,7 @@ export const shareGarden = async (req: Request, res: Response) => {
                 return res.status(200).json({ link: existing.hash });
             }
 
-            const hash = Math.random().toString(36).substring(2);
+            const hash = randomUUID();
             await LinkModel.create({ hash, userId });
             return res.status(200).json({ link: hash });
         } else {
