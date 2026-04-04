@@ -139,9 +139,9 @@ POST /api/v1/content
 Authorization: Bearer <token>
 {
   "type": "youtube",
-  "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  "title": "Learn TypeScript",
-  "tags": ["coding", "typescript"]
+  "link": "https://www.youtube.com/watch?v=abc123",
+  "title": "Master Calisthenics",
+  "tags": ["fitness", "calisthenics"]
 }
 # Response: { "message": "Content added" }
 ```
