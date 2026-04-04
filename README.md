@@ -146,7 +146,11 @@ Authorization: Bearer <token>
 # Response: { "message": "Content added" }
 ```
 
-**Valid types:** document, tweet, youtube, link
+**Valid types:**
+- **document** - PDF, articles, blog posts
+- **tweet** - Twitter/X posts
+- **youtube** - YouTube videos
+- **link** - Any general URL
 
 ### Get All Content
 ```bash
