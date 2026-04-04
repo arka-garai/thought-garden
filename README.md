@@ -113,18 +113,22 @@ The server will start on `http://localhost:3345`
 ```bash
 POST /api/v1/signup
 {
-  "username": "john",
-  "password": "password123"
+  "username": "johndoe",
+  "password": "Password123!"
 }
 # Response: { "message": "Signed up" }
 ```
+
+**Zod Validation:**
+- username: 3-10 characters
+- password: 8-20 chars, must contain uppercase, lowercase, number, special char (!@#$%^&*)
 
 ### User Signin
 ```bash
 POST /api/v1/signin
 {
-  "username": "john",
-  "password": "password123"
+  "username": "johndoe",
+  "password": "Password123!"
 }
 # Response: { "token": "eyJhbGciOiJIUzI1..." }
 ```
@@ -135,12 +139,14 @@ POST /api/v1/content
 Authorization: Bearer <token>
 {
   "type": "youtube",
-  "link": "https://youtube.com/watch?v=abc123",
+  "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "title": "Learn TypeScript",
   "tags": ["coding", "typescript"]
 }
 # Response: { "message": "Content added" }
 ```
+
+**Valid types:** document, tweet, youtube, link
 
 ### Get All Content
 ```bash
@@ -154,7 +160,7 @@ Authorization: Bearer <token>
 DELETE /api/v1/content
 Authorization: Bearer <token>
 {
-  "contentId": "..."
+  "contentId": "507f1f77bcf86cd799439011"
 }
 # Response: { "message": "Deleted" }
 ```
@@ -182,7 +188,7 @@ Authorization: Bearer <token>
 ### View Shared Brain
 ```bash
 GET /api/v1/brain/abc123xyz
-# Response: { "username": "john", "content": [...] }
+# Response: { "username": "johndoe", "content": [...] }
 ```
 
 ## License
