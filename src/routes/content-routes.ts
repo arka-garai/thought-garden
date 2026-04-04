@@ -2,10 +2,10 @@ import { Router } from "express";
 import { addContent, getContent, deleteContent } from "../controllers/content-controller.js";
 import { userMiddleware } from "../middleware/user-middleware.js";
 
-const router = Router();
+const contentRouter = Router();
 
-router.post("/", userMiddleware, addContent);
-router.get("/", userMiddleware, getContent);
-router.delete("/", userMiddleware, deleteContent);
+contentRouter.post("/", userMiddleware, addContent);
+contentRouter.get("/", userMiddleware, getContent);
+contentRouter.delete("/", userMiddleware, deleteContent);
 
-export default router;
+export default contentRouter;
