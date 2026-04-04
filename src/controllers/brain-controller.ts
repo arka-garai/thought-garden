@@ -1,5 +1,4 @@
 import type { Request, Response } from "express";
-import mongoose from "mongoose";
 import { ContentModel, LinkModel, UserModel } from "../models/db-model.js";
 import { ShareBrainSchema } from "../validations/user-validation.js";
 
@@ -13,19 +12,18 @@ export const shareBrain = async (req: Request, res: Response) => {
         }
 
         const { share } = result.data;
-        const userObjectId = new mongoose.Types.ObjectId(userId);
 
         if (share) {
-            const existing = await LinkModel.findOne({ userId: userObjectId });
+            const existing = await LinkModel.findOne({ userId });
             if (existing) {
                 return res.status(200).json({ link: existing.hash });
             }
 
             const hash = Math.random().toString(36).substring(2);
-            await LinkModel.create({ hash, userId: userObjectId });
+            await LinkModel.create({ hash, userId });
             return res.status(200).json({ link: hash });
         } else {
-            await LinkModel.deleteOne({ userId: userObjectId });
+            await LinkModel.deleteOne({ userId });
             return res.status(200).json({ message: "Sharing disabled" });
         }
     } catch (err) {

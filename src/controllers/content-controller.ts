@@ -1,5 +1,4 @@
 import type { Request, Response } from "express";
-import mongoose from "mongoose";
 import { ContentModel, TagModel } from "../models/db-model.js";
 import { ContentSchema, DeleteContentSchema } from "../validations/user-validation.js";
 
@@ -29,7 +28,7 @@ export const addContent = async (req: Request, res: Response) => {
             type,
             title,
             tags: allTags.map((t) => t._id),
-            userId: new mongoose.Types.ObjectId(userId)
+            userId
         });
 
         return res.status(200).json({ message: "Content added" });
@@ -42,7 +41,7 @@ export const getContent = async (req: Request, res: Response) => {
     try {
         const userId = req.userId;
 
-        const content = await ContentModel.find({ userId: new mongoose.Types.ObjectId(userId) })
+        const content = await ContentModel.find({ userId })
             .populate("tags")
             .lean();
 
