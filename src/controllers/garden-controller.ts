@@ -27,14 +27,17 @@ export const shareGarden = async (req: Request, res: Response) => {
             await LinkModel.deleteOne({ userId });
             return res.status(200).json({ message: "Sharing disabled" });
         }
-    } catch (err) {
+    } catch {
         return res.status(500).json({ message: "Server error" });
     }
 };
 
 export const getSharedGarden = async (req: Request, res: Response) => {
     try {
-        const shareLinkParam = req.params.shareLink as string;
+        const shareLinkParam = req.params.shareLink;
+        if (!shareLinkParam) {
+            return res.status(400).json({ message: "Missing share link" });
+        }
         const link = await LinkModel.findOne({ hash: shareLinkParam });
 
         if (!link) {
@@ -50,7 +53,7 @@ export const getSharedGarden = async (req: Request, res: Response) => {
             .populate("tags")
 
         return res.status(200).json({ username: user.username, content });
-    } catch (err) {
+    } catch {
         return res.status(500).json({ message: "Server error" });
     }
 };

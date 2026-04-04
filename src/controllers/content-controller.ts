@@ -32,7 +32,7 @@ export const addContent = async (req: Request, res: Response) => {
         });
 
         return res.status(200).json({ message: "Content added" });
-    } catch (err) {
+    } catch {
         return res.status(500).json({ message: "Server error" });
     }
 };
@@ -45,7 +45,7 @@ export const getContent = async (req: Request, res: Response) => {
             .populate("tags");
 
         return res.status(200).json({ content });
-    } catch (err) {
+    } catch {
         return res.status(500).json({ message: "Server error" });
     }
 };
@@ -72,7 +72,7 @@ export const deleteContent = async (req: Request, res: Response) => {
 
         await ContentModel.deleteOne({ _id: contentId });
         return res.status(200).json({ message: "Deleted" });
-    } catch (err) {
+    } catch {
         return res.status(500).json({ message: "Server error" });
     }
 };

@@ -29,7 +29,7 @@ export const signup = async (req: Request, res: Response) => {
         const hashedPassword = await hashPassword(password);
         await UserModel.create({ username, password: hashedPassword });
         return res.status(200).json({ message: "Signed up" });
-    } catch (err) {
+    } catch {
         return res.status(500).json({ message: "Server error" });
     }
 };
@@ -55,7 +55,7 @@ export const signin = async (req: Request, res: Response) => {
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_USER_PASSWORD as string);
         return res.status(200).json({ token });
-    } catch (err) {
+    } catch {
         return res.status(500).json({ message: "Internal server error" });
     }
 };

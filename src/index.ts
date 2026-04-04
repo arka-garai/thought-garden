@@ -1,16 +1,16 @@
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
-import authRoutes from "./routes/auth-routes.js";
-import contentRoutes from "./routes/content-routes.js";
-import gardenRoutes from "./routes/garden-routes.js";
+import authRouter from "./routes/auth-routes.js";
+import contentRouter from "./routes/content-routes.js";
+import gardenRouter from "./routes/garden-routes.js";
 
 const app = express();
 app.use(express.json());
 
-app.use("/api/v1", authRoutes);
-app.use("/api/v1/content", contentRoutes);
-app.use("/api/v1/garden", gardenRoutes);
+app.use("/api/v1", authRouter);
+app.use("/api/v1/content", contentRouter);
+app.use("/api/v1/garden", gardenRouter);
 
 const PORT = process.env.PORT || 3345;
 
