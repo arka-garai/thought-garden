@@ -42,18 +42,9 @@ export const getContent = async (req: Request, res: Response) => {
         const userId = req.userId;
 
         const content = await ContentModel.find({ userId })
-            .populate("tags")
-            .lean();
+            .populate("tags");
 
-        const formatted = content.map((c) => ({
-            id: c._id,
-            type: c.type,
-            link: c.link,
-            title: c.title,
-            tags: (c.tags as unknown as { title: string }[]).map((t) => t.title)
-        }));
-
-        return res.status(200).json({ content: formatted });
+        return res.status(200).json({ content });
     } catch (err) {
         return res.status(500).json({ message: "Server error" });
     }
