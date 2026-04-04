@@ -1,38 +1,53 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-export interface JwtPayload {
+interface MyPayload {
     userId: string;
 }
 
 declare global {
     namespace Express {
         interface Request {
-            user?: JwtPayload;
+            userId?: string;
         }
     }
 }
 
-export interface AuthRequest extends Request {
-    user?: JwtPayload;
-}
-
-export const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const userMiddleware = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     const authHeader = req.headers.authorization;
+
     if (!authHeader) {
         return res.status(403).json({ message: "Unauthorized" });
     }
-    
+
     const parts = authHeader.split(" ");
-    if (parts.length !== 2) {
+    if (parts.length !== 2 || parts[0] !== "Bearer") {
         return res.status(403).json({ message: "Unauthorized" });
     }
-    
-    const token = parts[1] as string;
+
+    const token = parts[1];
+
     try {
-        const JWT_SECRET = process.env.JWT_USER_PASSWORD || "secret";
-        const decoded = jwt.verify(token, JWT_SECRET) as unknown as JwtPayload;
-        req.user = decoded;
+        const JWT_SECRET = process.env.JWT_USER_PASSWORD as string;
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+
+        if (typeof decoded === "string") {
+            return res.status(403).json({ message: "Invalid token" });
+        }
+
+        const payload = decoded as unknown as MyPayload;
+
+        if (!payload.userId) {
+            return res.status(403).json({ message: "Invalid token payload" });
+        }
+
+        req.userId = payload.userId;
+
         next();
     } catch {
         return res.status(403).json({ message: "Unauthorized" });
