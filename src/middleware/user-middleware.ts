@@ -34,9 +34,9 @@ export const userMiddleware = (
     const token = parts[1];
 
     try {
-        const JWT_SECRET = process.env.JWT_USER_PASSWORD as string;
+        const JWT_SECRET = process.env.JWT_USER_PASSWORD;
 
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET as string);
 
         if (typeof decoded === "string") {
             return res.status(403).json({ message: "Invalid token" });
