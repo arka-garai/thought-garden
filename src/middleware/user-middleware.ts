@@ -1,15 +1,16 @@
 import jwt from "jsonwebtoken";
 import type { JwtPayload } from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
+import type { Types } from "mongoose";
 
 interface MyPayload extends JwtPayload {
-    userId: string;
+    userId: Types.ObjectId;
 }
 
 declare global {
     namespace Express {
         interface Request {
-            userId?: string;
+            userId?: string | import("mongoose").Types.ObjectId;
         }
     }
 }
