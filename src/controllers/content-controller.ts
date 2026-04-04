@@ -5,7 +5,7 @@ import { ContentSchema, DeleteContentSchema } from "../validations/user-validati
 
 export const addContent = async (req: Request, res: Response) => {
     try {
-        const userId = req.userId;
+        const userId = req.user?.userId;
 
         const result = ContentSchema.safeParse(req.body);
         if (!result.success) {
@@ -40,7 +40,7 @@ export const addContent = async (req: Request, res: Response) => {
 
 export const getContent = async (req: Request, res: Response) => {
     try {
-        const userId = req.userId;
+        const userId = req.user?.userId;
 
         const content = await ContentModel.find({ userId: new mongoose.Types.ObjectId(userId) })
             .populate("tags")
@@ -62,7 +62,7 @@ export const getContent = async (req: Request, res: Response) => {
 
 export const deleteContent = async (req: Request, res: Response) => {
     try {
-        const userId = req.userId;
+        const userId = req.user?.userId;
 
         const result = DeleteContentSchema.safeParse(req.body);
         if (!result.success) {

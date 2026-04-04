@@ -5,7 +5,7 @@ import { ShareBrainSchema } from "../validations/user-validation.js";
 
 export const shareBrain = async (req: Request, res: Response) => {
     try {
-        const userId = req.userId;
+        const userId = req.user?.userId;
 
         const result = ShareBrainSchema.safeParse(req.body);
         if (!result.success) {
