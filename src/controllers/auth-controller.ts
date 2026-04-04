@@ -53,7 +53,7 @@ export const signin = async (req: Request, res: Response) => {
             return res.status(403).json({ message: "Wrong email password" });
         }
 
-        const token = jwt.sign({ userId: user._id.toString() }, process.env.JWT_USER_PASSWORD || "secret");
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_USER_PASSWORD || "secret");
         return res.status(200).json({ token });
     } catch (err) {
         return res.status(500).json({ message: "Internal server error" });
