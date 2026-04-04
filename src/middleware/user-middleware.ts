@@ -41,7 +41,7 @@ export const userMiddleware = (
             return res.status(403).json({ message: "Invalid token" });
         }
 
-        const payload = decoded as unknown as MyPayload;
+        const payload = decoded as MyPayload;
 
         if (!payload.userId) {
             return res.status(403).json({ message: "Invalid token payload" });
