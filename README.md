@@ -18,8 +18,6 @@ thought-garden/
 ├── assets/
 │   └── schema-design.png       # Database schema diagram
 ├── src/
-│   ├── schema/
-│   │   └── db.ts               # Mongoose schemas & models
 │   ├── controllers/
 │   │   ├── auth-controller.ts  # Authentication logic
 │   │   ├── content-controller.ts # Content CRUD operations
@@ -30,6 +28,8 @@ thought-garden/
 │   │   └── brain-routes.ts     # Brain sharing endpoints
 │   ├── middleware/
 │   │   └── user-middleware.ts # JWT verification
+│   ├── models/
+│   │   └── db-model.ts        # Mongoose schemas & models
 │   ├── validations/
 │   │   └── user-validation.ts # Zod validation schemas
 │   └── index.ts                # Entry point
