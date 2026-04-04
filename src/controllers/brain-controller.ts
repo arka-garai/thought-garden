@@ -47,17 +47,8 @@ export const getSharedBrain = async (req: Request, res: Response) => {
 
         const content = await ContentModel.find({ userId: link.userId })
             .populate("tags")
-            .lean();
 
-        const formatted = content.map((c) => ({
-            id: c._id,
-            type: c.type,
-            link: c.link,
-            title: c.title,
-            tags: (c.tags as unknown as { title: string }[]).map((t) => t.title)
-        }));
-
-        return res.status(200).json({ username: user.username, content: formatted });
+        return res.status(200).json({ username: user.username, content });
     } catch (err) {
         return res.status(500).json({ message: "Server error" });
     }
