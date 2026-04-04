@@ -97,10 +97,11 @@ JWT_USER_PASSWORD=your_jwt_secret_key
 ### Running the Project
 
 ```bash
-# Build TypeScript
-npm run build
+# Build and start (development)
+npm run dev
 
-# Start server
+# Or build and start separately
+npm run build
 npm run start
 ```
 
